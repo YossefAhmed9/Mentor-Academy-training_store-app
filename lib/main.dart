@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentor_academy/Login/Login_cubit.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/core/network/remote/dio_helper.dart';
 import 'package:mentor_academy/onBoarding/onBoarding_cubit.dart';
@@ -27,7 +28,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => onBoardingCubit(),
           lazy: true,
-        )
+        ),
+        BlocProvider(
+          create: (context) => loginCubit(),
+          lazy: true,
+        ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -41,7 +46,7 @@ class MyApp extends StatelessWidget {
 
                 if (CasheHelper.getBoolean(key: cubit.onBoardingCasheKey) ==
                     true) {
-                  return Login_Screen();
+                  return LoginScreen();
                 } else {
                   return onBoarding();
                 }

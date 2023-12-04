@@ -72,7 +72,7 @@ class _onBoardingState extends State<onBoarding> {
                           CasheHelper.setBoolean(
                               key: cubit.onBoardingCasheKey, value: true);
                           cubit.noONBoard();
-                          navigateAndDelPast(context, Login_Screen());
+                          navigateAndDelPast(context, LoginScreen());
                         },
                         child: Text(
                           'Login',
