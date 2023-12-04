@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentor_academy/Login/Login_States.dart';
 import 'package:mentor_academy/Login/Login_cubit.dart';
 
 import '../components/components.dart';
+import 'Register Screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -19,7 +21,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer(
+    return BlocConsumer<loginCubit, loginStates>(
         listener: (BuildContext context, Object? state) {},
         builder: (context, state) {
           loginCubit cubit = loginCubit.get(context);
@@ -129,7 +131,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'RegisterPage');
+                              navigateTo(context, Register_Screen());
                             },
                             child: const Text(
                               'Register Now!',

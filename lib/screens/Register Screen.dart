@@ -1,151 +1,282 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentor_academy/Register/Register_cubit.dart';
 
+import '../Register/Register_states.dart';
 import '../components/components.dart';
 
-class Register_Screen extends StatefulWidget {
-  @override
-  State<Register_Screen> createState() => _Register_ScreenState();
-}
-
-class _Register_ScreenState extends State<Register_Screen> {
+class Register_Screen extends StatelessWidget {
   var emailcontroller = TextEditingController();
+  var namecontroller = TextEditingController();
+  var passcontroller = TextEditingController();
+  var phonecontroller = TextEditingController();
+  var nationalIDcontroller = TextEditingController();
+  var confirmpasscontroller = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
+  var nameKey = GlobalKey<FormState>();
   var emailKey = GlobalKey<FormState>();
   var passKey = GlobalKey<FormState>();
-  bool showpass = true;
-  bool isLoading = false;
-  var passcontroller = TextEditingController();
+  var phoneKey = GlobalKey<FormState>();
+  var nationalIDKey = GlobalKey<FormState>();
+  var confirmpass = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Register form'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  'Register',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 50.0,
-                  ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                defaultTextFormField(
-                  emailKey,
-                  TextInputType.emailAddress,
-                  emailcontroller,
-                  (value) {
-                    print(value);
-                  },
-                  (value) {
-                    print(value);
-                  },
-                  () {},
-                  'Email',
-                  const OutlineInputBorder(),
-                  const Icon(
-                    Icons.email_rounded,
-                  ),
-                  (value) {
-                    if (value!.isEmpty) {
-                      return ('Email must be filled');
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  controller: passcontroller,
-                  keyboardType: TextInputType.visiblePassword,
-                  onFieldSubmitted: (value) {
-                    print(value);
-                  },
-                  onChanged: (value) {
-                    print(value);
-                  },
-                  obscureText: showpass,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return ('Password must be filled');
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: const OutlineInputBorder(),
-                    prefixIcon: const Icon(Icons.lock_outline),
-                    suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            showpass = !showpass;
-                          });
-                        },
-                        child: const Icon(Icons.remove_red_eye_outlined)),
-                  ),
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 55.0,
-                  child: MaterialButton(
-                    onPressed: () async {},
-                    color: Colors.blue,
-                    child: isLoading == true
-                        ? CircularProgressIndicator()
-                        : Text(
-                            'Register',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+    return BlocConsumer<RegisterCubit, RegisterStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        RegisterCubit cubit = RegisterCubit();
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Register form'),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Text(
-                      'Already have an account?',
+                      'Register',
                       style: TextStyle(
-                        fontSize: 18.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 50.0,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        'Login Now!',
-                        style: TextStyle(fontSize: 18),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    //name
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: defaultTextFormField(
+                        nameKey,
+                        TextInputType.text,
+                        namecontroller,
+                        (value) {
+                          print(value);
+                        },
+                        (value) {
+                          print(value);
+                        },
+                        () {},
+                        'Enter your name',
+                        const OutlineInputBorder(),
+                        const Icon(
+                          Icons.email_rounded,
+                        ),
+                        (value) {
+                          if (value!.isEmpty) {
+                            return ('name must be filled');
+                          }
+                          return null;
+                        },
                       ),
+                    ),
+                    //email
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: defaultTextFormField(
+                        emailKey,
+                        TextInputType.emailAddress,
+                        emailcontroller,
+                        (value) {
+                          print(value);
+                        },
+                        (value) {
+                          print(value);
+                        },
+                        () {},
+                        'Email',
+                        const OutlineInputBorder(),
+                        const Icon(
+                          Icons.email_rounded,
+                        ),
+                        (value) {
+                          if (value!.isEmpty) {
+                            return ('Email must be filled');
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    //phone
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: defaultTextFormField(
+                        phoneKey,
+                        TextInputType.numberWithOptions(),
+                        phonecontroller,
+                        (value) {
+                          print(value);
+                        },
+                        (value) {
+                          print(value);
+                        },
+                        () {},
+                        'Enter your phone number',
+                        const OutlineInputBorder(),
+                        const Icon(
+                          Icons.email_rounded,
+                        ),
+                        (value) {
+                          if (value!.isEmpty) {
+                            return ('name must be filled');
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    //national ID
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: defaultTextFormField(
+                        nationalIDKey,
+                        TextInputType.text,
+                        nationalIDcontroller,
+                        (value) {
+                          print(value);
+                        },
+                        (value) {
+                          print(value);
+                        },
+                        () {},
+                        'Enter your national ID',
+                        const OutlineInputBorder(),
+                        const Icon(
+                          Icons.person,
+                        ),
+                        (value) {
+                          if (value!.isEmpty) {
+                            return ('national ID must be filled');
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+
+                    //pass
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: TextFormField(
+                        key: passKey,
+                        controller: passcontroller,
+                        keyboardType: TextInputType.text,
+                        onFieldSubmitted: (value) {
+                          print(value);
+                        },
+                        onChanged: (value) {
+                          print(value);
+                        },
+                        obscureText: cubit.showPass,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return ('Password must be filled');
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            labelText: 'Password',
+                            border: const OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.lock_outline),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  cubit.convertPass();
+                                },
+                                icon: Icon(Icons.remove_red_eye_outlined))),
+                      ),
+                    ),
+                    //confirm pass
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: TextFormField(
+                        key: confirmpass,
+                        controller: confirmpasscontroller,
+                        keyboardType: TextInputType.text,
+                        onFieldSubmitted: (value) {
+                          print(value);
+                        },
+                        onChanged: (value) {
+                          print(value);
+                        },
+                        obscureText: cubit.showPass,
+                        validator: (value) {
+                          if (passcontroller.text !=
+                              confirmpasscontroller.text) {
+                            return ('passwords aren\'t the same');
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Confirm Password',
+                          border: const OutlineInputBorder(),
+                          prefixIcon: const Icon(Icons.lock_outline),
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                cubit.convertPass();
+                              },
+                              icon: const Icon(Icons.remove_red_eye_outlined)),
+                        ),
+                      ),
+                    ),
+
+                    Center(
+                      child: TextButton(
+                          onPressed: () async {
+                            await cubit.addImage();
+                          },
+                          child: Text('Pick an image')),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 55.0,
+                      child: MaterialButton(
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {}
+                        },
+                        color: Colors.blue,
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 35,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Already have an account?',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            'Login Now!',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                // defaultButton(double.infinity, 50.0, Colors.red, () {
-                //   print('heeeeelo');
-                // }, 'Register', Colors.white, 18),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
