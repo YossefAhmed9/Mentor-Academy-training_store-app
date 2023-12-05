@@ -5,6 +5,8 @@ class DioHelper {
   static init() {
     dio = Dio(BaseOptions(
       receiveDataWhenStatusError: true,
+      responseType: ResponseType.json,
+      validateStatus: (status) => status == 200,
     ));
   }
 

@@ -37,9 +37,8 @@ class Register_Screen extends StatelessWidget {
               child: Form(
                 key: formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Register',
                       style: TextStyle(
                         color: Colors.black,
@@ -48,7 +47,7 @@ class Register_Screen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                     //name
                     Padding(
@@ -236,7 +235,20 @@ class Register_Screen extends StatelessWidget {
                       height: 55.0,
                       child: MaterialButton(
                         onPressed: () async {
-                          if (formKey.currentState!.validate()) {}
+                          if (formKey.currentState!.validate()) {
+                            try {
+                              cubit.register(
+                                  namecontroller.text,
+                                  emailcontroller.text,
+                                  phonecontroller.text,
+                                  nationalIDcontroller.text,
+                                  'female',
+                                  cubit.userImage);
+                            } catch (error) {
+                              print(error.toString());
+                              print(error.runtimeType);
+                            }
+                          }
                         },
                         color: Colors.blue,
                         child: Text(

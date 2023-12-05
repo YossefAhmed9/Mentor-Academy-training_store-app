@@ -15,24 +15,25 @@ class RegisterCubit extends Cubit<RegisterStates> {
   static RegisterCubit get(context) => BlocProvider.of(context);
   UserModel? userModel;
 
-  void register(
-      String name, email, phone, nationalID, gender, token, profileImage) {
+  void register(String name, email, phone, nationalID, gender, profileImage) {
     emit(registerLoadingState());
     DioHelper.getData(
         url: 'https://elwekala.onrender.com/user/register',
         data: {
-          'name': name,
-          'email': email,
-          'phone': phone,
-          'nationalID': nationalID,
-          'gender': gender,
-          'token': token,
-          'profileImage': userImage
+          "name": name,
+          "email": email,
+          "phone": phone,
+          "nationalID": nationalID,
+          "gender": gender,
+          "profileImage": userImage
         }).then((value) {
       userModel = UserModel.fromJson(value.data);
-      print(userModel);
+      print(value.data);
+      print('User Model is $userModel');
       emit(registerDoneState());
     }).catchError((error) {
+      print('Error: $error');
+      print('Response: ${error.response}');
       print(error.toString());
       print(error.runtimeType);
       emit(registerErrorState(error));
