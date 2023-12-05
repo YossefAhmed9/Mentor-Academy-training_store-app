@@ -242,7 +242,7 @@ class Register_Screen extends StatelessWidget {
                                   emailcontroller.text,
                                   phonecontroller.text,
                                   nationalIDcontroller.text,
-                                  'female',
+                                  'male',
                                   cubit.userImage);
                             } catch (error) {
                               print(error.toString());
