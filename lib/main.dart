@@ -5,10 +5,10 @@ import 'package:mentor_academy/Register/Register_cubit.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/core/network/remote/dio_helper.dart';
 import 'package:mentor_academy/onBoarding/onBoarding_cubit.dart';
-import 'package:mentor_academy/screens/login_screen.dart';
+import 'package:mentor_academy/product_cubit.dart';
+import 'package:mentor_academy/screens/HomePage.dart';
 
 import 'onBoarding/onBoarding_states.dart';
-import 'screens/onBoarding_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +38,10 @@ class MyApp extends StatelessWidget {
           create: (context) => RegisterCubit(),
           lazy: true,
         ),
+        BlocProvider(
+          create: (context) => ProductCubit(),
+          lazy: true,
+        ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -48,13 +52,13 @@ class MyApp extends StatelessWidget {
           home: BlocConsumer<onBoardingCubit, onBoardingStates>(
               builder: (context, state) {
                 onBoardingCubit cubit = onBoardingCubit.get(context);
-
-                if (CasheHelper.getBoolean(key: cubit.onBoardingCasheKey) ==
-                    true) {
-                  return LoginScreen();
-                } else {
-                  return onBoarding();
-                }
+                return HomePage();
+                // if (CasheHelper.getBoolean(key: cubit.onBoardingCasheKey) ==
+                //     true) {
+                //   return LoginScreen();
+                // } else {
+                //   return onBoarding();
+                // }
               },
               listener: (context, state) {})),
     );

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 /*
-class Product {
-  Widget newCard(
-          {required ProductModel model, required BuildContext context}) =>
+class ProductItem {
+  Widget newCard({required Laptops? model, required BuildContext context}) =>
       GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, 'UpdateProduct', arguments: model);
@@ -29,7 +28,7 @@ class Product {
                               height: 70,
                             ),
                             Text(
-                              model.title.substring(0, 18),
+                              model?.name ?? '',
                               style: const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14,
@@ -67,7 +66,7 @@ class Product {
                   right: 50,
                   bottom: 100,
                   child: Image.network(
-                    model.image,
+                    model.image ?? '',
                     width: 105,
                     height: 105,
                   ),

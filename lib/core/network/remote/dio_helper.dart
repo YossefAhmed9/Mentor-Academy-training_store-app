@@ -6,7 +6,6 @@ class DioHelper {
     dio = Dio(BaseOptions(
       baseUrl: 'https://elwekala.onrender.com',
       receiveDataWhenStatusError: true,
-      responseType: ResponseType.json,
     ));
   }
 

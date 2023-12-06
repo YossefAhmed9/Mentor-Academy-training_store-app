@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mentor_academy/components/components.dart';
+import 'package:mentor_academy/core/components/components.dart';
 import 'package:mentor_academy/onBoarding/onBoarding_cubit.dart';
 import 'package:mentor_academy/onBoarding/onBoarding_states.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

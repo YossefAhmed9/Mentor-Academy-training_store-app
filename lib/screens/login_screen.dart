@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/Login/Login_States.dart';
 import 'package:mentor_academy/Login/Login_cubit.dart';
+import 'package:mentor_academy/screens/HomePage.dart';
 
-import '../components/components.dart';
+import '../core/components/components.dart';
 import 'Register Screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -107,7 +108,11 @@ class LoginScreen extends StatelessWidget {
                         width: double.infinity,
                         height: 55.0,
                         child: MaterialButton(
-                          onPressed: () async {},
+                          onPressed: () async {
+                            cubit.login(
+                                emailcontroller.text, passcontroller.text);
+                            navigateTo(context, HomePage());
+                          },
                           color: Colors.blue,
                           child: const Text(
                             'LOGIN',
@@ -131,8 +136,6 @@ class LoginScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              cubit.login(
-                                  emailcontroller.text, passcontroller.text);
                               navigateTo(context, Register_Screen());
                             },
                             child: const Text(
