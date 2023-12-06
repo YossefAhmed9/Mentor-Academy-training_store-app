@@ -1,7 +1,15 @@
-abstract class loginStates {}
+abstract class LoginStates {}
 
-class loginInitState extends loginStates {}
+class LoginInitState extends LoginStates {}
 
-class loginLastIndex extends loginStates {}
+class LoginLoadingState extends LoginStates {}
 
-class loginNOTLastIndex extends loginStates {}
+class LoginDoneState extends LoginStates {}
+
+class LoginImageChoose extends LoginStates {}
+
+class LoginErrorState extends LoginStates {
+  final error;
+
+  LoginErrorState(this.error);
+}

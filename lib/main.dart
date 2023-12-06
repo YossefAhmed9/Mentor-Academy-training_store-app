@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           lazy: true,
         ),
         BlocProvider(
-          create: (context) => loginCubit(),
+          create: (context) => LoginCubit(),
           lazy: true,
         ),
         BlocProvider(

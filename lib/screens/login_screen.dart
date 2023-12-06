@@ -21,10 +21,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<loginCubit, loginStates>(
+    return BlocConsumer<LoginCubit, LoginStates>(
         listener: (BuildContext context, Object? state) {},
         builder: (context, state) {
-          loginCubit cubit = loginCubit.get(context);
+          LoginCubit cubit = LoginCubit.get(context);
 
           return Scaffold(
             appBar: AppBar(
@@ -131,6 +131,8 @@ class LoginScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
+                              cubit.login(
+                                  emailcontroller.text, passcontroller.text);
                               navigateTo(context, Register_Screen());
                             },
                             child: const Text(

@@ -17,16 +17,14 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   void register(String name, email, phone, nationalID, gender, profileImage) {
     emit(registerLoadingState());
-    DioHelper.getData(
-        url: 'https://elwekala.onrender.com/user/register',
-        data: {
-          "name": name,
-          "email": email,
-          "phone": phone,
-          "nationalID": nationalID,
-          "gender": gender,
-          "profileImage": userImage
-        }).then((value) {
+    DioHelper.getData(url: '/user/register', data: {
+      "name": name,
+      "email": email,
+      "phone": phone,
+      "nationalID": nationalID,
+      "gender": gender,
+      "profileImage": userImage
+    }).then((value) {
       userModel = UserModel.fromJson(value.data);
       print(value.data);
       print('User Model is $userModel');
