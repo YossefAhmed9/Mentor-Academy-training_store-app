@@ -23,92 +23,102 @@ class HomePage extends StatelessWidget {
             centerTitle: true,
           ),
           body: SafeArea(
-              child: GridView.builder(
-                  itemCount: 10,
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 50,
-                      crossAxisSpacing: 10),
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        Stack(
-                          clipBehavior: Clip.none,
+              child: cubit.result == null
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.teal,
+                      ),
+                    )
+                  : GridView.builder(
+                      itemCount: 10,
+                      shrinkWrap: true,
+                      physics: BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 50,
+                              crossAxisSpacing: 10),
+                      itemBuilder: (context, index) {
+                        return Column(
                           children: [
-                            Card(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              elevation: 5.0,
-                              child: Padding(
-                                padding: const EdgeInsets.all(9.0),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(
-                                            height: 70,
-                                          ),
-                                          Text(
-                                            Product.fromJson(
-                                                        cubit.result, index)
-                                                    .name ??
-                                                '',
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                            maxLines: 1,
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                '${Product.fromJson(cubit.result, index).price} \$',
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 20,
-                                                    color: Colors.black),
-                                              ),
-                                              IconButton(
-                                                  onPressed: () {},
-                                                  icon: const Icon(
-                                                    Icons.favorite,
-                                                    color: Colors.red,
-                                                  )),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            const SizedBox(
+                              height: 32,
                             ),
-                            Positioned(
-                              right: 50,
-                              bottom: 85,
-                              child: Image.network(
-                                Product.fromJson(cubit.result, index).image ??
-                                    '',
-                                width: 120,
-                                height: 120,
-                              ),
+                            Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                Card(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  elevation: 5.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(9.0),
+                                    child: Row(
+                                      children: [
+                                        Flexible(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                height: 70,
+                                              ),
+                                              Text(
+                                                Product.fromJson(
+                                                            cubit.result, index)
+                                                        .name ??
+                                                    '',
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14,
+                                                  color: Colors.black,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                maxLines: 1,
+                                                softWrap: true,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    '${Product.fromJson(cubit.result, index).price} \$',
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 20,
+                                                        color: Colors.black),
+                                                  ),
+                                                  IconButton(
+                                                      onPressed: () {},
+                                                      icon: const Icon(
+                                                        Icons.favorite,
+                                                        color: Colors.red,
+                                                      )),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 50,
+                                  bottom: 85,
+                                  child: Image.network(
+                                    Product.fromJson(cubit.result, index)
+                                            .image ??
+                                        '',
+                                    width: 120,
+                                    height: 120,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                      ],
-                    );
-                  })),
+                        );
+                      })),
         );
       },
     );
