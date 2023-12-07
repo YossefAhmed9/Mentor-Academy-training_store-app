@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           lazy: true,
         ),
         BlocProvider(
-          create: (context) => ProductCubit(),
+          create: (context) => ProductCubit()..getAllproducts(),
           lazy: true,
         ),
       ],

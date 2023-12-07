@@ -52,7 +52,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
       bytes = File(image!.path).readAsBytesSync();
       userImage = base64Encode(bytes!);
       print('images = $userImage');
-      print('platform is = ${ImagePicker.platform}');
       emit(registerImageChoose());
     } else {
       print('no image');

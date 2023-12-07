@@ -4,9 +4,9 @@ class DioHelper {
   static late Dio dio;
   static init() {
     dio = Dio(BaseOptions(
-      baseUrl: 'https://elwekala.onrender.com',
-      receiveDataWhenStatusError: true,
-    ));
+        baseUrl: 'https://elwekala.onrender.com',
+        receiveDataWhenStatusError: true,
+        responseType: ResponseType.json));
   }
 
   static Future<Response> getData(
@@ -20,7 +20,11 @@ class DioHelper {
       'lang': 'en',
       'Authorization': token ?? '',
     };
-    return await dio.get(url, queryParameters: query, data: data);
+    return await dio.get(
+      url,
+      queryParameters: query,
+      data: data,
+    );
   }
 
   static Future<Response> postData({

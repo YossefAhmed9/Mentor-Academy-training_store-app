@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-/*
+import '../../models/product_model.dart';
+
 class ProductItem {
-  Widget newCard({required Laptops? model, required BuildContext context}) =>
+  Widget newCard({required Product model, required BuildContext context}) =>
       GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, 'UpdateProduct', arguments: model);
@@ -77,7 +78,7 @@ class ProductItem {
         ),
       );
 }
-*/
+
 class DefaultTextFormField {
   final Key? key;
   final TextInputType keyboard;
