@@ -8,11 +8,13 @@ class ProductCubit extends Cubit<ProductStates> {
 
   static ProductCubit get(context) => BlocProvider.of(context);
   var result;
+  List list = [];
 
   getAllproducts() async {
     emit(ProductLoadingState());
-    await DioHelper.getData(url: '/product/Laptops').then((value) async {
+    await DioHelper.getData(url: '/product/Laptops').then((value) {
       result = value.data;
+      list.addAll(value.data['product']);
       emit(ProductDoneState());
     }).catchError((error) {
       print('${error.runtimeType}');

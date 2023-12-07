@@ -30,9 +30,9 @@ class HomePage extends StatelessWidget {
                       ),
                     )
                   : GridView.builder(
-                      itemCount: 10,
+                      itemCount: cubit.list.length,
                       shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
