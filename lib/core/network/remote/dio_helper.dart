@@ -4,7 +4,7 @@ class DioHelper {
   static late Dio dio;
   static init() {
     dio = Dio(BaseOptions(
-        baseUrl: 'https://elwekala.onrender.com',
+        baseUrl: 'https://elwekala.onrender.com/',
         receiveDataWhenStatusError: true,
         responseType: ResponseType.json));
   }

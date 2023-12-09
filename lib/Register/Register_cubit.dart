@@ -15,14 +15,16 @@ class RegisterCubit extends Cubit<RegisterStates> {
   static RegisterCubit get(context) => BlocProvider.of(context);
   UserModel? userModel;
 
-  void register(String name, email, phone, nationalID, gender, profileImage) {
+  void register(
+      String name, email, phone, nationalID, gender, password, profileImage) {
     emit(registerLoadingState());
-    DioHelper.getData(url: '/user/register', data: {
+    DioHelper.getData(url: 'user/register', data: {
       "name": name,
       "email": email,
       "phone": phone,
       "nationalID": nationalID,
       "gender": gender,
+      "password": password,
       "profileImage": userImage
     }).then((value) {
       userModel = UserModel.fromJson(value.data);

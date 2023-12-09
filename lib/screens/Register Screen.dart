@@ -225,8 +225,8 @@ class Register_Screen extends StatelessWidget {
 
                     Center(
                       child: TextButton(
-                          onPressed: () async {
-                            await cubit.addImage();
+                          onPressed: () {
+                            cubit.addImage();
                           },
                           child: Text('Pick an image')),
                     ),
@@ -234,7 +234,7 @@ class Register_Screen extends StatelessWidget {
                       width: double.infinity,
                       height: 55.0,
                       child: MaterialButton(
-                        onPressed: () async {
+                        onPressed: () {
                           if (formKey.currentState!.validate()) {
                             try {
                               cubit.register(
@@ -242,7 +242,8 @@ class Register_Screen extends StatelessWidget {
                                   emailcontroller.text,
                                   phonecontroller.text,
                                   nationalIDcontroller.text,
-                                  'male',
+                                  'Male',
+                                  passcontroller.text,
                                   cubit.userImage);
                             } catch (error) {
                               print(error.toString());
