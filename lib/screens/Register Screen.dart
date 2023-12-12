@@ -238,13 +238,15 @@ class Register_Screen extends StatelessWidget {
                           if (formKey.currentState!.validate()) {
                             try {
                               cubit.register(
-                                  namecontroller.text,
-                                  emailcontroller.text,
-                                  phonecontroller.text,
-                                  nationalIDcontroller.text,
-                                  'Male',
-                                  passcontroller.text,
-                                  cubit.userImage);
+                                name: namecontroller.text,
+                                email: emailcontroller.text,
+                                gender: 'Male',
+                                nationalID: nationalIDcontroller.text,
+                                password: passcontroller.text,
+                                phone: phonecontroller.text,
+                                profileImage: cubit.image,
+                              );
+                              print(cubit.image);
                             } catch (error) {
                               print(error.toString());
                               print(error.runtimeType);

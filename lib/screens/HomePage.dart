@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentor_academy/core/components/components.dart';
+import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/product_cubit.dart';
+import 'package:mentor_academy/screens/cart_screen.dart';
 
 import '../Product states.dart';
+import '../cart/cart_cubit.dart';
 import '../models/product_model.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,6 +20,18 @@ class HomePage extends StatelessWidget {
         ProductCubit cubit = ProductCubit.get(context);
         return Scaffold(
           appBar: AppBar(
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    cubit.getAllproducts();
+                    navigateTo(context, CartScreen());
+                  },
+                  icon: Icon(
+                    Icons.shopping_cart_outlined,
+                    size: 32,
+                    color: Colors.teal[700],
+                  ))
+            ],
             title: const Text(
               'Home Page',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
@@ -68,8 +84,8 @@ class HomePage extends StatelessWidget {
                                                         .name ??
                                                     '',
                                                 style: const TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 15,
                                                   color: Colors.black,
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -85,7 +101,7 @@ class HomePage extends StatelessWidget {
                                                     style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.w600,
-                                                        fontSize: 20,
+                                                        fontSize: 17,
                                                         color: Colors.black),
                                                   ),
                                                   IconButton(
@@ -94,6 +110,22 @@ class HomePage extends StatelessWidget {
                                                         Icons.favorite,
                                                         color: Colors.red,
                                                       )),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        CartCubit.get(context).addToCart(
+                                                            nationalId: CasheHelper
+                                                                .getBoolean(
+                                                                    key:
+                                                                        'nationalId'),
+                                                            productId: Product
+                                                                    .fromJson(
+                                                                        cubit
+                                                                            .result,
+                                                                        index)
+                                                                .sId);
+                                                      },
+                                                      icon: Icon(Icons
+                                                          .shopping_cart_outlined))
                                                 ],
                                               )
                                             ],
@@ -107,11 +139,15 @@ class HomePage extends StatelessWidget {
                                   right: 50,
                                   bottom: 85,
                                   child: Image.network(
-                                    Product.fromJson(cubit.result, index)
-                                            .image ??
-                                        '',
+                                    Product.fromJson(cubit.result, index).image ?? '',
                                     width: 120,
                                     height: 120,
+                                    errorBuilder: (BuildContext context,
+                                            Object exception,
+                                            StackTrace? stackTrace) {
+                                      return Image.asset('assets/images/error image.png',width: 50,height: 50,);
+
+                                    }
                                   ),
                                 ),
                               ],
