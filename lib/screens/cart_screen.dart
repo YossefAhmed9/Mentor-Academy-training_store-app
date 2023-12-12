@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/cart/cart%20states.dart';
 import 'package:mentor_academy/cart/cart_cubit.dart';
+import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/models/cart_model.dart';
 
 class CartScreen extends StatelessWidget {
@@ -21,24 +23,18 @@ class CartScreen extends StatelessWidget {
               ),
               centerTitle: true,
             ),
-            body: cubit.cart == null
+            body: cubit.cartList.isEmpty
                 ? Center(
                     child: CircularProgressIndicator(
                       color: Colors.teal,
                     ),
                   )
-                : ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Container(
-                          decoration: BoxDecoration(color: Colors.black12),
-                          height: 3,
-                          width: double.infinity,
-                        ),
-                      );
-                    },
-                    itemCount: 5,
+                : ListView.builder(
+
+                    itemCount: cubit.cartList.length,
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    cacheExtent: 6,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -50,14 +46,14 @@ class CartScreen extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 10),
                                     child: Text(
-                                      '${CartProducts.fromJson(cubit.cart, index).name}',
+                                      '${CartProducts.fromJson(cubit.cartValue, index).name}',
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                   Text(
-                                    '${CartProducts.fromJson(cubit.cart, index).price}\$',
+                                    '${CartProducts.fromJson(cubit.cartValue, index).totalPrice}\$',
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500),
@@ -69,9 +65,14 @@ class CartScreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Image.network(
-                                    '${CartProducts.fromJson(cubit.cart, index).image}',
+                                    '${CartProducts.fromJson(cubit.cartValue, index).image}',
                                     height: 170,
                                     width: 170,
+                                    errorBuilder: (BuildContext context,
+                                            Object exception,
+                                            StackTrace? stackTrace) {
+                                      return Image.asset('assets/images/error image.png');
+                                    }
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -86,13 +87,9 @@ class CartScreen extends StatelessWidget {
                                         child: Row(
                                           children: [
                                             IconButton(
-                                              onPressed: () async {
-                                                await cubit.updateQuantity(
-                                                  productId:
-                                                      CartProducts.fromJson(
-                                                              cubit.cart, index)
-                                                          .sId,
-                                                );
+                                              onPressed: () {
+                                                cubit.addToCart(nationalId: CasheHelper.getBoolean(key: 'nationalId'),
+                                                    productId: CartProducts.fromJson(cubit.cartValue, index).sId);
                                               },
                                               icon: Icon(
                                                 Icons.add,
@@ -100,7 +97,7 @@ class CartScreen extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '${CartProducts.fromJson(cubit.cart, index).quantity}',
+                                              '${CartProducts.fromJson(cubit.cartValue, index).quantity}',
                                               style: TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -115,7 +112,21 @@ class CartScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                      )
+                                      ),
+                                      IconButton(
+                                          onPressed: () {
+                                            cubit.deleteCart(
+                                                CasheHelper.getBoolean(
+                                                    key: 'nationalId'),
+                                                CartProducts.fromJson(
+                                                        cubit.cartValue, index)
+                                                    .sId);
+                                          },
+                                          icon: Icon(
+                                            CupertinoIcons.trash,
+                                            color: Colors.red,
+                                            size: 30,
+                                          ))
                                     ],
                                   ),
                                 ],

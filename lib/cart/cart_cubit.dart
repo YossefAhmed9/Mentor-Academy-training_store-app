@@ -9,14 +9,18 @@ class CartCubit extends Cubit<CartStates> {
   CartCubit() : super(CartInitState());
 
   static CartCubit get(context) => BlocProvider.of(context);
-  List cartProducts = [];
-  void addToCart({required String nationalId, productId}) {
+
+
+  Future<void> addToCart({required String nationalId, productId}) async {
     emit(CartLoadingState());
-    DioHelper.postData(url: ApiConstants().addCartApi, data: {
+    await getCart();
+    await DioHelper.postData(url: ApiConstants().addCartApi, data: {
       "nationalId": nationalId,
       "productId": productId,
       "quantity": "1"
-    }).then((value) {
+    }).then((value) async {
+      cartList.add(value);
+      await getCart();
       emit(CartDoneState());
     }).catchError((error) {
       emit(CartErrorState(error));
@@ -27,8 +31,8 @@ class CartCubit extends Cubit<CartStates> {
     });
   }
 
-  //CartModel? cartModel;
-  var cart;
+  var cartValue;
+  List cartList = [];
   Future<void> getCart() async {
     emit(GetCartLoadingState());
 
@@ -37,8 +41,10 @@ class CartCubit extends Cubit<CartStates> {
     }).then((value) {
       //cartModel = CartModel.fromJson(value.data);
       //cartProducts.addAll(value.data);
-      cart = value.data;
-      print('This is value ${cart}');
+      print('This is cartList length from getCart() ${cartList.length}');
+      cartValue = value.data;
+      cartList.add(value.data['products']);
+      print('This is value ${cartValue}');
       emit(GetCartDoneState());
     }).catchError((error) {
       emit(GetCartErrorState(error));
@@ -54,6 +60,8 @@ class CartCubit extends Cubit<CartStates> {
       "productId": productId,
     }).then((value) {
       // cartModel = CartModel.fromJson(value.data);
+      cartList.remove(value);
+      getCart();
       print(value.data);
       emit(CartDeleteDoneState());
     }).catchError((error) {
@@ -63,24 +71,30 @@ class CartCubit extends Cubit<CartStates> {
     });
   }
 
-  void updateCart() {
-    DioHelper.postData(url: ApiConstants().updateCartApi, data: {});
-  }
-
   void favorite() {
     DioHelper.getData(url: ApiConstants().favoriteCartApi);
   }
 
-  updateQuantity({productId}) {
-    DioHelper.putData(url: ApiConstants().updateCartApi, data: {
-      "nationalId ": CasheHelper.getBoolean(key: 'nationalId'),
+  var updateValue;
+  List updateList=[];
+  void updateQuantity({required productId, nationalId}) async {
+    emit(CartUpdateLoadingState());
+    await DioHelper.putData(url: ApiConstants().updateCartApi, data: {
+      "nationalId ": nationalId,
       "productId": productId,
-      "quantity": '1',
+      "quantity": 1
     }).then((value) {
-      print(value.data);
+      updateValue = value.data;
+      cartList.clear();
+      cartList.add(value);
+      //updateList.addAll(value.data);
+      getCart();
+      emit(CartUpdateDoneState());
+      print('This is UPDATED value ${value.data}');
     }).catchError((error) {
       print(error.toString());
       print(error.runtimeType);
+      emit(CartUpdateErrorState(error));
     });
   }
 

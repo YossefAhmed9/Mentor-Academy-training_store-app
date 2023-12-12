@@ -10,7 +10,9 @@ class CartDeleteLoadingState extends CartStates {}
 
 class CartDeleteDoneState extends CartStates {}
 
-class CartUpdateState extends CartStates {}
+class CartUpdateLoadingState extends CartStates {}
+
+class CartUpdateDoneState extends CartStates {}
 
 class CartUpdateErrorState extends CartStates {
   final error;
