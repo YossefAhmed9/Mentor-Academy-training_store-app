@@ -12,9 +12,10 @@ class ProductCubit extends Cubit<ProductStates> {
 
   getAllproducts() async {
     emit(ProductLoadingState());
-    await DioHelper.getData(url: '/product/Laptops').then((value) {
+    await DioHelper.getData(url: 'product/Laptops').then((value) {
       result = value.data;
       list.addAll(value.data['product']);
+      print(value.data);
       emit(ProductDoneState());
     }).catchError((error) {
       print('${error.runtimeType}');

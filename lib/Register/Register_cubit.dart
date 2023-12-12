@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../core/network/constants.dart';
 import '../core/network/remote/dio_helper.dart';
 import '../models/userModel.dart';
 import 'Register_states.dart';
@@ -16,9 +17,15 @@ class RegisterCubit extends Cubit<RegisterStates> {
   UserModel? userModel;
 
   void register(
-      String name, email, phone, nationalID, gender, password, profileImage) {
+      {required String name,
+      email,
+      phone,
+      nationalID,
+      gender,
+      password,
+      profileImage}) {
     emit(registerLoadingState());
-    DioHelper.getData(url: 'user/register', data: {
+    DioHelper.postData(url: ApiConstants().registerApi, data: {
       "name": name,
       "email": email,
       "phone": phone,
