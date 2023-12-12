@@ -5,6 +5,7 @@ import 'package:mentor_academy/Register/Register_cubit.dart';
 import 'package:mentor_academy/cart/cart_cubit.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/core/network/remote/dio_helper.dart';
+import 'package:mentor_academy/favorite%20cubit.dart';
 import 'package:mentor_academy/onBoarding/onBoarding_cubit.dart';
 import 'package:mentor_academy/product_cubit.dart';
 import 'package:mentor_academy/screens/HomePage.dart';
@@ -49,6 +50,10 @@ class MyApp extends StatelessWidget {
           create: (context) => CartCubit()
             ..getCart()
             ..addToCart(nationalId: CasheHelper.getBoolean(key: 'nationalId')),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => FavoriteCubit(),
           lazy: true,
         ),
       ],
