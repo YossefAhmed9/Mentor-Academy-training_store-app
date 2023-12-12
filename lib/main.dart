@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           lazy: true,
         ),
         BlocProvider(
-          create: (context) => FavoriteCubit(),
+          create: (context) => FavoriteCubit()..getFavorites(),
           lazy: true,
         ),
       ],
