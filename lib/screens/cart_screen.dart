@@ -29,7 +29,17 @@ class CartScreen extends StatelessWidget {
                       color: Colors.teal,
                     ),
                   )
-                : ListView.builder(
+                : ListView.separated(
+                separatorBuilder: (context,index){
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      decoration: BoxDecoration(color: Colors.black54),
+                      height: 2,
+                      width: double.infinity,
+                    ),
+                  );
+                },
 
                     itemCount: cubit.cartList.length,
                     shrinkWrap: true,
