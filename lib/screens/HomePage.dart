@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/core/components/components.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
+import 'package:mentor_academy/favorit_screen.dart';
+import 'package:mentor_academy/favorite%20cubit.dart';
 import 'package:mentor_academy/product_cubit.dart';
 import 'package:mentor_academy/screens/cart_screen.dart';
 
 import '../Product states.dart';
 import '../cart/cart_cubit.dart';
+import '../favorite_model.dart';
 import '../models/product_model.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,8 +21,12 @@ class HomePage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         ProductCubit cubit = ProductCubit.get(context);
+        FavoriteCubit favCubit=FavoriteCubit.get(context);
         return Scaffold(
           appBar: AppBar(
+            leading: IconButton(onPressed: (){
+navigateTo(context, FavoriteScreen());
+            }, icon: (Icon(Icons.favorite,color: Colors.red,size: 32,))),
             actions: [
               IconButton(
                   onPressed: () {
@@ -79,7 +86,7 @@ class HomePage extends StatelessWidget {
                                                 height: 70,
                                               ),
                                               Text(
-                                                Product.fromJson(
+                                                ProductModel.fromJson(
                                                             cubit.result, index)
                                                         .name ??
                                                     '',
@@ -97,7 +104,7 @@ class HomePage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    '${Product.fromJson(cubit.result, index).price} \$',
+                                                    '${ProductModel.fromJson(cubit.result, index).price} \$',
                                                     style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -105,7 +112,10 @@ class HomePage extends StatelessWidget {
                                                         color: Colors.black),
                                                   ),
                                                   IconButton(
-                                                      onPressed: () {},
+                                                      onPressed: () {
+                                                        favCubit.addToFavorite(productId: ProductModel.fromJson(cubit.result, index).sId);
+
+                                                      },
                                                       icon: const Icon(
                                                         Icons.favorite,
                                                         color: Colors.red,
@@ -117,7 +127,7 @@ class HomePage extends StatelessWidget {
                                                                 .getBoolean(
                                                                     key:
                                                                         'nationalId'),
-                                                            productId: Product
+                                                            productId: ProductModel
                                                                     .fromJson(
                                                                         cubit
                                                                             .result,
@@ -139,7 +149,7 @@ class HomePage extends StatelessWidget {
                                   right: 50,
                                   bottom: 85,
                                   child: Image.network(
-                                    Product.fromJson(cubit.result, index).image ?? '',
+                                      ProductModel.fromJson(cubit.result, index).image ?? '',
                                     width: 120,
                                     height: 120,
                                     errorBuilder: (BuildContext context,

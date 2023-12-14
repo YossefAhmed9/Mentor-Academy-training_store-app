@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/product_model.dart';
 
 class ProductItem {
-  Widget newCard({required Product model, required BuildContext context}) =>
+  Widget newCard({required ProductModel model, required BuildContext context}) =>
       GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, 'UpdateProduct', arguments: model);

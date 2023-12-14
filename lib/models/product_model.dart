@@ -16,7 +16,7 @@
 //   }
 // }
 
-class Product {
+class ProductModel {
   String? sId;
   String? status;
   String? category;
@@ -29,7 +29,7 @@ class Product {
   List<String>? images;
   dynamic iV;
 
-  Product(
+  ProductModel(
     this.sId,
     this.status,
     this.category,
@@ -43,7 +43,7 @@ class Product {
     this.iV,
   );
 
-  Product.fromJson(dynamic json, int index) {
+  ProductModel.fromJson(dynamic json, int index) {
     sId = json['product'][index]['_id'];
     status = json['product'][index]['status'];
     category = json['product'][index]['category'];
