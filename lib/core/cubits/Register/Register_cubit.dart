@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../core/network/constants.dart';
-import '../core/network/remote/dio_helper.dart';
-import '../models/userModel.dart';
+import '../../network/constants.dart';
+import '../../network/remote/dio_helper.dart';
+import '../../../models/userModel.dart';
 import 'Register_states.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {

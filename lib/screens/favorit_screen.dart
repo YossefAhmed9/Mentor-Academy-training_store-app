@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mentor_academy/favorites/favorite%20cubit.dart';
-import 'package:mentor_academy/favorites/favorite%20states.dart';
 import 'package:mentor_academy/models/favorite_model.dart';
+import '../core/cubits/favorites/favorite cubit.dart';
+import '../core/cubits/favorites/favorite states.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});

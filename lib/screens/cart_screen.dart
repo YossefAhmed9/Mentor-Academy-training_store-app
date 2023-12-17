@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mentor_academy/cart/cart%20states.dart';
-import 'package:mentor_academy/cart/cart_cubit.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/models/cart_model.dart';
+
+import '../core/cubits/cart/cart states.dart';
+import '../core/cubits/cart/cart_cubit.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});

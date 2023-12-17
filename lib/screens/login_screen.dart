@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mentor_academy/Login/Login_States.dart';
-import 'package:mentor_academy/Login/Login_cubit.dart';
+import 'package:mentor_academy/core/cubits/Login/Login_States.dart';
+import 'package:mentor_academy/core/cubits/Login/Login_cubit.dart';
 import 'package:mentor_academy/screens/HomePage.dart';
 
 import '../core/components/components.dart';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mentor_academy/account/account_cubit.dart';
-import 'package:mentor_academy/profile_screen.dart';
-import 'package:mentor_academy/update/update_states.dart';
+import 'package:mentor_academy/core/cubits/account/account_cubit.dart';
+import 'package:mentor_academy/screens/profile_screen.dart';
+import 'package:mentor_academy/core/cubits/update/update_states.dart';
 import '../core/components/components.dart';
-import '../update/update_cubit.dart';
+import '../core/cubits/update/update_cubit.dart';
 
 class UpdateProfile extends StatelessWidget {
   const UpdateProfile({super.key});

@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentor_academy/core/cubits/favorites/favorite%20states.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/core/network/remote/dio_helper.dart';
-import 'package:mentor_academy/favorites/favorite%20states.dart';
-
-import '../core/network/constants.dart';
+import '../../network/constants.dart';
 
 class FavoriteCubit extends Cubit<FavoriteStates> {
   FavoriteCubit() : super(FavoriteInitState());

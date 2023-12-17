@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 
-import '../core/network/constants.dart';
-import '../core/network/remote/dio_helper.dart';
-import '../models/userModel.dart';
+import '../../network/constants.dart';
+import '../../network/remote/dio_helper.dart';
+import '../../../models/userModel.dart';
 import 'Login_States.dart';
 
 class LoginCubit extends Cubit<LoginStates> {

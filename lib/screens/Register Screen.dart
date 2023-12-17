@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mentor_academy/Register/Register_cubit.dart';
-
-import '../Register/Register_states.dart';
+import 'package:mentor_academy/core/cubits/Register/Register_cubit.dart';
 import '../core/components/components.dart';
+import '../core/cubits/Register/Register_states.dart';
 
 class Register_Screen extends StatelessWidget {
   var emailcontroller = TextEditingController();
