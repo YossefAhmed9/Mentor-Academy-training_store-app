@@ -13,6 +13,7 @@ class LoginCubit extends Cubit<LoginStates> {
   UserModel? userModel;
 
   var nationalId;
+  var token;
 
   void login(String email, password) {
     emit(LoginLoadingState());
@@ -21,9 +22,10 @@ class LoginCubit extends Cubit<LoginStates> {
       "password": password,
     }).then((value) {
       //userModel = UserModel.fromJson(value.data);
-      nationalId = CasheHelper.setBoolean(
-          key: 'nationalId', value: value.data['user']['nationalId']);
+      nationalId = CasheHelper.setBoolean(key: 'nationalId', value: value.data['user']['nationalId']);
+      token = CasheHelper.setBoolean(key: 'token', value: value.data['user']['token']);
       print('This is nationalId $nationalId');
+      print('This is token $token');
       print(value.data);
       emit(LoginDoneState());
     }).catchError((error) {

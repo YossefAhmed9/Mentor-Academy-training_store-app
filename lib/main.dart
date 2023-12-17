@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/Login/Login_cubit.dart';
 import 'package:mentor_academy/Register/Register_cubit.dart';
+import 'package:mentor_academy/account/account_cubit.dart';
 import 'package:mentor_academy/cart/cart_cubit.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/core/network/remote/dio_helper.dart';
-import 'package:mentor_academy/favorite%20cubit.dart';
+import 'package:mentor_academy/favorites/favorite%20cubit.dart';
 import 'package:mentor_academy/onBoarding/onBoarding_cubit.dart';
-import 'package:mentor_academy/product_cubit.dart';
+import 'package:mentor_academy/product/product_cubit.dart';
+import 'package:mentor_academy/profile_screen.dart';
 import 'package:mentor_academy/screens/HomePage.dart';
 import 'package:mentor_academy/screens/login_screen.dart';
 import 'package:mentor_academy/screens/onBoarding_screen.dart';
-
+import 'package:mentor_academy/update/update_cubit.dart';
 import 'onBoarding/onBoarding_states.dart';
 
 Future<void> main() async {
@@ -56,6 +58,14 @@ class MyApp extends StatelessWidget {
           create: (context) => FavoriteCubit()..getFavorites(),
           lazy: true,
         ),
+        BlocProvider(
+          create: (context) => AccountCubit()..getProfile(token: CasheHelper.getBoolean(key: 'token')),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => UpdateCubit(),
+          lazy: true,
+        ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -66,7 +76,7 @@ class MyApp extends StatelessWidget {
           home: BlocConsumer<onBoardingCubit, onBoardingStates>(
               builder: (context, state) {
                 onBoardingCubit cubit = onBoardingCubit.get(context);
-                // return HomePage();
+                //return HomePage();
                 if (CasheHelper.getBoolean(key: cubit.onBoardingCasheKey) ==
                         true &&
                     CasheHelper.getBoolean(key: 'nationalId') == null) {
@@ -76,6 +86,7 @@ class MyApp extends StatelessWidget {
                 } else {
                   return onBoarding();
                 }
+                //return ProfileScreen();
               },
               listener: (context, state) {})),
     );

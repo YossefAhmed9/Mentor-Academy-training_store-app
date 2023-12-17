@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/core/network/remote/dio_helper.dart';
-import 'package:mentor_academy/favorite%20states.dart';
+import 'package:mentor_academy/favorites/favorite%20states.dart';
 
-import 'core/network/constants.dart';
+import '../core/network/constants.dart';
 
 class FavoriteCubit extends Cubit<FavoriteStates> {
   FavoriteCubit() : super(FavoriteInitState());
@@ -22,6 +22,7 @@ class FavoriteCubit extends Cubit<FavoriteStates> {
       FavValue = value.data;
       emit(GetFavoriteDoneState());
       print(value.data);
+      print("this is token ${CasheHelper.getBoolean(key: 'token')}");
     }).catchError((error) {
       emit(GetFavoriteErrorState(error));
       print(error.toString());

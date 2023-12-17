@@ -118,18 +118,21 @@ Widget defaultTextFormField(
   final Icon prefix,
   final FormFieldValidator<String>? validate,
 ) =>
-    TextFormField(
-      key: key,
-      keyboardType: keyboard,
-      controller: controller,
-      onFieldSubmitted: submit,
-      onChanged: change,
-      onTap: tap,
-      validator: validate,
-      decoration: InputDecoration(
-        labelText: label,
-        border: border,
-        //prefixIcon: prefix,
+    Padding(
+      padding: const EdgeInsets.all(15),
+      child: TextFormField(
+        key: key,
+        keyboardType: keyboard,
+        controller: controller,
+        onFieldSubmitted: submit,
+        onChanged: change,
+        onTap: tap,
+        validator: validate,
+        decoration: InputDecoration(
+          labelText: label,
+          border: border,
+          //prefixIcon: prefix,
+        ),
       ),
     );
 

@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/core/components/components.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
-import 'package:mentor_academy/favorit_screen.dart';
-import 'package:mentor_academy/favorite%20cubit.dart';
-import 'package:mentor_academy/product_cubit.dart';
+import 'package:mentor_academy/profile_screen.dart';
+import 'package:mentor_academy/screens/favorit_screen.dart';
+import 'package:mentor_academy/favorites/favorite%20cubit.dart';
+import 'package:mentor_academy/product/product_cubit.dart';
 import 'package:mentor_academy/screens/cart_screen.dart';
-
-import '../Product states.dart';
+import '../product/Product states.dart';
 import '../cart/cart_cubit.dart';
-import '../favorite_model.dart';
 import '../models/product_model.dart';
 
 class HomePage extends StatelessWidget {
@@ -25,8 +24,8 @@ class HomePage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(onPressed: (){
-navigateTo(context, FavoriteScreen());
-            }, icon: (Icon(Icons.favorite,color: Colors.red,size: 32,))),
+              navigateTo(context, ProfileScreen());
+            }, icon: Icon(Icons.person_2_sharp,size: 32,color: Colors.teal,)),
             actions: [
               IconButton(
                   onPressed: () {
@@ -37,7 +36,10 @@ navigateTo(context, FavoriteScreen());
                     Icons.shopping_cart_outlined,
                     size: 32,
                     color: Colors.teal[700],
-                  ))
+                  )),
+              IconButton(onPressed: (){
+                navigateTo(context, FavoriteScreen());
+              }, icon: (Icon(Icons.favorite,color: Colors.red,size: 32,))),
             ],
             title: const Text(
               'Home Page',
