@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mentor_academy/core/components/components.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
 import 'package:mentor_academy/screens/profile_screen.dart';
 import 'package:mentor_academy/screens/favorit_screen.dart';
 import 'package:mentor_academy/core/cubits/product/product_cubit.dart';
 import 'package:mentor_academy/screens/cart_screen.dart';
+import 'package:mentor_academy/screens/resources/components/components.dart';
 import '../core/cubits/cart/cart_cubit.dart';
 import '../core/cubits/favorites/favorite cubit.dart';
 import '../core/cubits/product/Product states.dart';

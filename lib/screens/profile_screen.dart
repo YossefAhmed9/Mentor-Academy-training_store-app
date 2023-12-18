@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/core/cubits/account/account_cubit.dart';
 import 'package:mentor_academy/models/account_model.dart';
-import 'package:mentor_academy/core/components/components.dart';
 import 'package:mentor_academy/core/network/local/shared_prefrence.dart';
+import 'package:mentor_academy/screens/resources/components/components.dart';
 import 'package:mentor_academy/screens/update_profile.dart';
-
 import '../core/cubits/account/account_states.dart';
 
 class ProfileScreen extends StatelessWidget {

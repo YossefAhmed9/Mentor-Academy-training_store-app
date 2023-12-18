@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/core/cubits/Login/Login_States.dart';
 import 'package:mentor_academy/core/cubits/Login/Login_cubit.dart';
 import 'package:mentor_academy/screens/HomePage.dart';
-
-import '../core/components/components.dart';
+import 'package:mentor_academy/screens/resources/components/components.dart';
 import 'Register Screen.dart';
 
 class LoginScreen extends StatelessWidget {

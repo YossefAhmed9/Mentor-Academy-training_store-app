@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentor_academy/core/cubits/account/account_cubit.dart';
-import 'package:mentor_academy/screens/profile_screen.dart';
 import 'package:mentor_academy/core/cubits/update/update_states.dart';
-import '../core/components/components.dart';
+import 'package:mentor_academy/screens/resources/components/components.dart';
 import '../core/cubits/update/update_cubit.dart';
 
 class UpdateProfile extends StatelessWidget {
@@ -97,14 +96,15 @@ class UpdateProfile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(25),
                           color: Colors.teal),
                       child: defaultButton(200, 70, Colors.transparent, () {
-                        AccountCubit.get(context).updateProfile(nameController.text,
-                            emailController.text,
-                            phoneController.text,
-                        ).then((value){
-
-Navigator.pop(context);
-                        } );
-
+                        AccountCubit.get(context)
+                            .updateProfile(
+                          nameController.text,
+                          emailController.text,
+                          phoneController.text,
+                        )
+                            .then((value) {
+                          Navigator.pop(context);
+                        });
                       }, 'Update Now!', Colors.white, 20),
                     )
                   ],
