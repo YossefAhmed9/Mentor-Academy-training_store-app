@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:mentor_academy/core/cubits/onBoarding/onBoarding_cubit.dart';
+import '../core/network/local/shared_prefrence.dart';
+import '../screens/login_screen.dart';
+import '../screens/resources/components/components.dart';
 
 class OnBoardingModel {
   final String title;
-  final String body;
+  final Widget body;
   final String image;
 
   OnBoardingModel({
@@ -27,27 +32,12 @@ Widget onBoardBuildingItem(OnBoardingModel model) => Column(
           style: TextStyle(fontFamily: 'Kablammo-Regular.ttf', fontSize: 25),
         ),
         //body
-        SizedBox(
-          height: 50,
-        ),
 
-        Text(
-          '${model.body}',
-          style: TextStyle(fontFamily: 'Kablammo-Regular.ttf', fontSize: 25),
-        ),
-        SizedBox(
-          height: 10,
-        )
+
+        SizedBox(child: model.body),
+
       ],
     );
 
-List<OnBoardingModel> onboardingList = [
-  OnBoardingModel(
-      title: 'title 1', body: 'body 1', image: 'assets/images/onboard.png'),
-  OnBoardingModel(
-      title: 'title 2', body: 'body 2', image: 'assets/images/onboard.png'),
-  OnBoardingModel(
-      title: 'title 3', body: 'body 3', image: 'assets/images/onboard.png'),
-];
 
 final pageViewController = PageController(initialPage: 0);
